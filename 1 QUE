@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <string.h>
+
+// Function to encrypt plaintext using Caesar cipher
+void caesarEncrypt(char plaintext[], int key) {
+    int i;
+    char encryptedText[strlen(plaintext)];
+
+    for (i = 0; plaintext[i] != '\0'; i++) {
+        // Encrypt uppercase letters
+        if (plaintext[i] >= 'A' && plaintext[i] <= 'Z')
+            encryptedText[i] = ((plaintext[i] - 'A' + key) % 26) + 'A';
+        // Encrypt lowercase letters
+        else if (plaintext[i] >= 'a' && plaintext[i] <= 'z')
+            encryptedText[i] = ((plaintext[i] - 'a' + key) % 26) + 'a';
+        // Keep non-alphabetic characters unchanged
+        else
+            encryptedText[i] = plaintext[i];
+    }
+    encryptedText[i] = '\0';
+
+    printf("Encrypted text: %s\n", encryptedText);
+}
+
+int main() {
+    char plaintext[100];
+    int key;
+
+    printf("Enter the plaintext: ");
+    fgets(plaintext, sizeof(plaintext), stdin);
+    printf("Enter the key: ");
+    scanf("%d", &key);
+
+    caesarEncrypt(plaintext, key);
+
+    return 0;
+}
